@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import django_heroku #pip install
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,9 +29,8 @@ DEBUG = True
 # DEBUG = os.environ.get('DEBUG_VALUE')
 
 ALLOWED_HOSTS = [
-    'blog-app-sdkevin.herokuapp.com'
+    'blog-app-sdkevin.herokuapp.com' 
 ]
-
 
 # Application definition
 
@@ -152,3 +152,5 @@ AWS_S3_FILE_OVERWRITE = False #wont overwrite files with same names
 AWS_DEFAULT_ACL = None  #might be unnecessary
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+django_heroku.settings(locals())
