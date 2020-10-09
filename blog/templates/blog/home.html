@@ -2,16 +2,21 @@
 
 {% block content %}
   {% for post in posts %}
-  <article class="media content-section">
-    
+  <article class="media content-section"> 
     <div class="media-body">
-      <h2 class="article-title">{{ post.title }}</h2>
-      <div class="article-metadata">
-        <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
-        <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
-        <small class="text-muted">
-          {{ post.date_posted|date:"F d, Y" }}
-        </small>
+      <div class="article-data">
+        <div class="article-metadata">
+          <h2 class="article-title">{{ post.title }}</h2>
+        </div>
+        <div class="bottom-info">
+          <div class="post-date text-muted">
+              {{ post.date_posted|date:"F d, Y" }}
+          </div>
+          <div class="user-data">
+            by
+            <a class="mx-auto" href="{% url 'user-posts' post.author.username %}"><img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}"></a>
+          </div>
+        </div>
       </div>
       <p class="article-content">{{ post.content }}</p>
       <small><a href="{% url 'post-detail' post.id %}">Read More</a> </small>
@@ -28,7 +33,7 @@
     {% for num in page_obj.paginator.page_range %}
       {% if page_obj.number == num %}
         <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
-      {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+      {% elif num > page_obj.number|add:'-3' and page_obj.number|add:'3' > num %}
       <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
       {% endif %}
     {% endfor %}
